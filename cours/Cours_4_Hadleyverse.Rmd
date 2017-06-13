@@ -117,7 +117,7 @@ Les variables indiquant les groupes sont conservées, en plus des variables cré
 
 ## Group by + mutate {.reduceCode}
 
-`mutate` utilisé avec `summarise` permet de calculer la nouvelle variable par groupe. Comparer :
+`mutate` utilisé avec `group_by` permet de calculer la nouvelle variable par groupe. Comparer :
 ```{r}
 tab %>% mutate(var2 = sum(var), var3 = mean(var))
 tab %>% group_by(class) %>% 
@@ -127,7 +127,7 @@ Bien entendu ça ne fonctionne qu'avec des *summary functions*.
 
 ## Group by + arrange (1) {.reduceCode}
 
-`groupe_by` ne fonctionne pas avec `arrange` pour trier par groupe.
+`group_by` ne fonctionne pas avec `arrange` pour trier par groupe.
 ```{r}
 tab %>% mutate(var2 = sin(var)) %>% 
   group_by(class) %>% 
@@ -151,6 +151,7 @@ tab %>% mutate(
   nline = n(), rn = row_number(),
   lead_var = lead(var), lagvar = lag(var))
 ```
+**N.B. : on peut aussi évoquer `n_distinct` qui compte le nombre distinct d'éléments (un cas concret : on peut compter un nombre de séjours en comptant le nombre de ligne (fonction `n`) et compter le nombre de patients avec `n_distinct` sur la variable identifiant les patients)**
 
 ## Fonctions spéciales + Group by {.reduceCode}
 
